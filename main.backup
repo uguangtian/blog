@@ -1,0 +1,53 @@
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"log"
+	"net/http"
+)
+
+func main() {
+	fmt.Println("Running")
+	// mux := http.NewServeMux()
+	// mux.Handle("/", &myHandler{})
+	http.HandleFunc("/func", FuncHandle)
+	http.ListenAndServe(":8080", nil)
+}
+
+type myHandler struct{}
+type Recipient struct {
+	Name, Gift string
+	Attended   bool
+}
+
+var recipients = []Recipient{
+	{"Aunt mildred", "bone china tes set", true},
+	{"Uncle Join", "moleskin pants", false},
+	{"Cousin Rodney", "", false},
+}
+
+func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	t := template.New("letter")
+	t, _ = template.ParseFiles("index.html", "index.html")
+	t.Execute(w, recipients)
+
+}
+
+func FuncHandle(w http.ResponseWriter, r *http.Request) {
+	// t := template.New("letter")
+	// t, _ = template.ParseFiles("index.html", "index.html")
+	// t.Execute(w, nil)
+	// fmt.Fprintf(w, "work")
+	// t := template.New("letter")
+	// t, _ = template.ParseFiles("index.html", "index.html")
+
+	t := template.Must(template.ParseFiles("index.html", "index.html"))
+	t.Execute(w, nil)
+	for _, r := range recipients {
+		err := t.Execute(w, r)
+		if err != nil {
+			log.Println("Execute template:", err)
+		}
+	} // t.Execute(w, r)
+}

@@ -1,0 +1,48 @@
+.{
+ margin:0px;0px;
+}
+
+
+.container{
+	margin:auto;
+	
+}
+html,body{margin:0; height:100%;}
+
+#wapper{
+	position:relative;
+	height:auto;
+	/* min-height:100%; */
+}
+
+#footer{
+	position:absolute;bottom:0px;
+	left:0px;
+	height:20px;
+}
+#main-content{
+	padding-bottom:60px;
+
+}
+ul{
+	padding-left:0px;
+	list-style:none;
+}
+
+nav ul li{
+	list-style-type:disc;
+}
+ul>li{
+	display:inline-block;
+	padding:8px;
+	padding:8px;
+	background-color:gray;
+        margin-left:40px;
+}
+
+.loginform{
+display:none;
+}
+.footer{
+	text-align:center;
+}
